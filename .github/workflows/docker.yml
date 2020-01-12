@@ -1,7 +1,7 @@
 name: Publish Docker Action Demo
 on: [push]
 jobs:
-  build:
+  broken_build:
     name: Broken
     runs-on: ubuntu-latest
     steps:
@@ -13,7 +13,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
         registry: docker.pkg.github.com
-  build:
+  wrokaround_build:
     name: Workaround
     runs-on: ubuntu-latest
     steps:
