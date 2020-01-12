@@ -10,5 +10,5 @@ jobs:
       with:
         name: ${{ github.repository }}/hello-world:latest
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ github.token }}
         registry: docker.pkg.github.com
