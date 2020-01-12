@@ -2,6 +2,7 @@ name: Publish Docker Action Demo
 on: [push]
 jobs:
   build:
+    name: Broken
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -9,6 +10,20 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@2.11
       with:
         name: ${{ github.repository }}/hello-world:latest
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+        registry: docker.pkg.github.com
+  build:
+    name: Workaround
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - run: echo "::set-output name=repo_name::${GITHUB_REPOSITORY,,}"
+      id: lowercaser
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@2.11
+      with:
+        name: ${{ steps.lowercaser.outputs.repo_name }}/hello-world:latest
         username: ${{ github.actor }}
         password: ${{ github.token }}
         registry: docker.pkg.github.com
